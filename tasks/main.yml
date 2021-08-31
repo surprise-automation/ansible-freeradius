@@ -1,2 +1,18 @@
 ---
 # tasks file for freeradius
+
+- name: Install FreeRADIUS
+  yum:
+    name: "{{ item }}"
+    state: latest
+  vars:
+    packages:
+    - freeradius
+    - freeradius-utils
+    - freeradius-mysql
+    - freeradius-perl
+
+- name: Manage /etc/raddb
+  synchronize:
+    src: file/etc/raddb/
+    dest: /etc/raddb/
